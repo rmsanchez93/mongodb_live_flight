@@ -32,7 +32,9 @@ client.connect(function(err) {
     })
     
     app.post('/liveFlight',(req, res)=>{
-        console.log(cities)
+        let departure = cities[0]
+        let arrival = cities[1]
+        console.log(departure, arrival)
         // hitThisFunction()
         // const col = db.collection('flightData')
         // here is where I make a random document based on flight pattern 

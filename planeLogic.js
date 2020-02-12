@@ -1,6 +1,8 @@
+const fetch = require('node-fetch')
+
 choose2RandomCities = ()=> {
     let array = []
-    const cities = ['Houston', 'LA', 'Boston', 'Philadelphia', 'New York', 'Seattle', 'Chicago']
+    const cities = ['Houston', 'Los Angeles', 'Boston', 'Philadelphia', 'New York', 'Seattle', 'Chicago']
     let num = getRandomInt(cities.length)
     array.push(cities[num])
     cities.splice(num, 1)
@@ -9,8 +11,20 @@ choose2RandomCities = ()=> {
     return array
 }
 
-test2 = ()=>{
-    console.log('this is something I can hit')
+getDistance = (arr)=>{
+   let d = arr[0]
+   let a = arr[1]
+   console.log(d, a)
+   fetch(`http://www.distance24.org/route.json?stops=${d}|${a}`,{
+       method: 'GET',
+       headers:{
+           'Accept-Content-Type': 'application/json',
+
+       }
+   })
+   .then(res => res.json())
+   .then(data => console.log(data))
+
 }
 
 
@@ -21,8 +35,8 @@ getRandomInt=(max)=> {
   }
 
 
-
+choose2RandomCities()
 module.exports = {
     choose2RandomCities,
-    test2
+    getDistance
 }
