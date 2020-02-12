@@ -5,6 +5,8 @@ const PORT = 3000 // or ENV
 const fetch = require('node-fetch')
 app.use(bodyParser.json())
 
+// import planelogic from other file
+const plane = require('./planeLogic')
 
 // using mongo node library vs mongoose because mongoose is ORM and requires structure much like SQL
 const MongoClient = require('mongodb').MongoClient;
