@@ -8,23 +8,24 @@ choose2RandomCities = ()=> {
     array.push(longLat[cities[num]])
     cities.splice(num, 1)
     let num2 = getRandomInt(cities.length)
-    array.push(longLat[cities[num]])
+    array.push(longLat[cities[num2]])
     return array
 }
 
 getDistance = (arr)=>{
-   let d = arr[0]
-   let a = arr[1]
-   console.log(d, a)
-   fetch(`http://www.distance24.org/route.json?stops=${d}|${a}`,{
-       method: 'GET',
-       headers:{
-           'Accept-Content-Type': 'application/json',
+    // NOT WORKING ON DISTANCE >>> STRETCH GOAL
+//    let d = arr[0]
+//    let a = arr[1]
+//    console.log(d, a)
+//    fetch(`http://www.distance24.org/route.json?stops=${d}|${a}`,{
+//        method: 'GET',
+//        headers:{
+//            'Accept-Content-Type': 'application/json',
 
-       }
-   })
-   .then(res => res.json())
-   .then(data => console.log(data))
+//        }
+//    })
+//    .then(res => res.json())
+//    .then(data => console.log(data))
 
 }
 
