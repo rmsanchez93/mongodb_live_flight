@@ -1,13 +1,14 @@
 const fetch = require('node-fetch')
+const longLat = require('./cities')
 
 choose2RandomCities = ()=> {
     let array = []
     const cities = ['Houston', 'Los Angeles', 'Boston', 'Philadelphia', 'New York', 'Seattle', 'Chicago']
     let num = getRandomInt(cities.length)
-    array.push(cities[num])
+    array.push(longLat[cities[num]])
     cities.splice(num, 1)
     let num2 = getRandomInt(cities.length)
-    array.push(cities[num2])
+    array.push(longLat[cities[num]])
     return array
 }
 
