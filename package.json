@@ -1,0 +1,25 @@
+{
+  "name": "mongodb_live_flight",
+  "version": "1.0.0",
+  "description": "node express and mongodb app to mimic a live flight with continuous writing to the database",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rmsanchez93/mongodb_live_flight.git"
+  },
+  "author": "Raul Sanchez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rmsanchez93/mongodb_live_flight/issues"
+  },
+  "homepage": "https://github.com/rmsanchez93/mongodb_live_flight#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mongodb": "^3.5.3",
+    "node-fetch": "^2.6.0"
+  }
+}
