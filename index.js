@@ -35,6 +35,7 @@ client.connect(function(err) {
         let departure = cities[0]
         let arrival = cities[1]
         console.log(departure, arrival)
+        console.log(plane.getRandomAltitude())
         // hitThisFunction()
         // const col = db.collection('flightData')
         // here is where I make a random document based on flight pattern 

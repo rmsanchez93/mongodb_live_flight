@@ -29,6 +29,16 @@ getDistance = (arr)=>{
 
 }
 
+getRandomAltitude = () => {
+    // MDN coming in clutch
+    function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+      }
+      return getRandomInt(32000, 43000)
+}
+
 
 
 //randomizer
@@ -40,5 +50,6 @@ getRandomInt=(max)=> {
 choose2RandomCities()
 module.exports = {
     choose2RandomCities,
-    getDistance
+    getDistance,
+    getRandomAltitude
 }
