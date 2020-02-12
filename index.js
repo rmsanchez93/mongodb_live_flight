@@ -32,32 +32,24 @@ client.connect(function(err) {
     })
     
     app.post('/liveFlight',(req, res)=>{
-        let arrOrObj = getRandomInt(2)
+        let data
+        let arrOrObj = getRandomInt(3)
+        arrOrObj == 0 ? data = runObject() : arrOrObj == 1 ? data = runArray() : arrOrObj == 2 ? data = runObjectObject() : null
         console.log('this is my random value ', arrOrObj)
-        let departure = cities[0]
-        let arrival = cities[1]
-        console.log(departure, arrival)
-        console.log(plane.getRandomAltitude())
-        console.log('plane fuselage temperature in C : ', plane.getRandomTemp(18, 27))
-        console.log('plane cockpit temperature in C : ', plane.getRandomTemp(18, 27))
-        console.log('plane left engine temperature in F : ', plane.getRandomTemp(1500, 1800))
-        console.log('plane right engine temperature in F : ', plane.getRandomTemp(1500, 1800))
-        console.log('plane speed in mph : ', plane.getRandomSpeed())
-        // hitThisFunction()
-        // const col = db.collection('flightData')
+        console.log(data)
+
+        const col = db.collection('flightData')
+
         // here is where I make a random document based on flight pattern 
         
-        // col.insertOne({
-        //     altitude: 45000,
-        //     pilotName: 'John hammond',
-        //     pilotSpeech: 'this is a test',
-        //     r_engine_temp: '115 F',
-        // }).then(data=> console.log(data))
+        col.insertOne(data)
+        .then(data=> console.log(data))
     
     
     } )
 
     app.delete('/clearFlightData', (req, res)=>{
+        db.collection('flightData').drop()
 
     })
     
@@ -69,6 +61,8 @@ client.connect(function(err) {
     //     let num = getRandomInt(arr.length)
     //     console.log(arr[num])
     // }
+
+
     setInterval(()=>{
         fetch('http://localhost:3000/liveFlight', {
             method: 'POST',
@@ -79,15 +73,63 @@ client.connect(function(err) {
         .then(res=> res.json())
         .then(data=> console.log(data))
         .catch(err => console.log(err))
-    }, 2000)
+    }, 500)
     
-    
+    // dropCollection()
+
     app.listen(PORT, ()=> console.log(`Listening on PORT ${PORT}`))
 
     // end connection to database
   });
   getRandomInt=(max)=> {
     return Math.floor(Math.random() * Math.floor(max));
+  }
+
+  dropCollection= () => {
+      fetch('http://localhost:3000/clearFlightData', {
+          method: 'DELETE'
+      })
+  }
+// makes a single object of random values
+  runObject = () => {
+    let flight = {}
+    let departure = cities[0]
+    let arrival = cities[1]
+    flight.departure = departure
+    flight.arrival = arrival
+    flight.fuselageTemp = `${plane.getRandomTemp(18, 27)} C`
+    flight.cockpitTemp = `${plane.getRandomTemp(18, 27)} C`
+    flight.leftEngineTemp = `${plane.getRandomTemp(1500, 1800)} F`
+    flight.rightEngineTemp = `${plane.getRandomTemp(1500, 1800)} F`
+    flight.speed = plane.getRandomSpeed()
+    return flight
+}
+// makes an array of objects of random values
+runArray = () => {
+    let array = []
+    let num = getRandomInt(3)
+    if(num == 0 ){
+        num = 1
+    }
+    for(let i = 0; i < num; i ++){
+        let newobj = runObject()
+        array.push(newobj)
+    }
+    return {array}
+    // console.log('making an array of objects')
+}
+// makes an object of objects of random values
+runObjectObject = () => {
+    let obj = {}
+    let num = getRandomInt(3)
+    if(num == 0 ){
+        num = 1
+    }
+    for(let i = 0; i < num; i ++){
+        obj[i] = runObject()
+    }
+    return obj
+    // console.log('making an object of objects')
   }
 // console.log(plane.choose2RandomCities())
 
