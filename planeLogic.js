@@ -29,21 +29,26 @@ getDistance = (arr)=>{
 
 }
 
-getRandomAltitude = () => {
-    // MDN coming in clutch
-    function getRandomInt(min, max) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
-      }
-      return getRandomInt(32000, 43000)
+getRandomAltitude = () => {    
+      return getRandomBetweenValues(32000, 43000)
 }
 
+getRandomTemp = (min, max) => {
+    return getRandomBetweenValues(min, max)
+}
 
+getRandomSpeed = () => {
+    return getRandomBetweenValues(547, 580)
+}
 
 //randomizer
 getRandomInt=(max)=> {
     return Math.floor(Math.random() * Math.floor(max));
+  }
+getRandomBetweenValues = (min, max) => {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
   }
 
 
@@ -51,5 +56,7 @@ choose2RandomCities()
 module.exports = {
     choose2RandomCities,
     getDistance,
-    getRandomAltitude
+    getRandomAltitude,
+    getRandomTemp,
+    getRandomSpeed
 }

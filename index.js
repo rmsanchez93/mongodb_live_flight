@@ -32,10 +32,17 @@ client.connect(function(err) {
     })
     
     app.post('/liveFlight',(req, res)=>{
+        let arrOrObj = getRandomInt(2)
+        console.log('this is my random value ', arrOrObj)
         let departure = cities[0]
         let arrival = cities[1]
         console.log(departure, arrival)
         console.log(plane.getRandomAltitude())
+        console.log('plane fuselage temperature in C : ', plane.getRandomTemp(18, 27))
+        console.log('plane cockpit temperature in C : ', plane.getRandomTemp(18, 27))
+        console.log('plane left engine temperature in F : ', plane.getRandomTemp(1500, 1800))
+        console.log('plane right engine temperature in F : ', plane.getRandomTemp(1500, 1800))
+        console.log('plane speed in mph : ', plane.getRandomSpeed())
         // hitThisFunction()
         // const col = db.collection('flightData')
         // here is where I make a random document based on flight pattern 
@@ -54,14 +61,14 @@ client.connect(function(err) {
 
     })
     
-    hitThisFunction = ()=>{
-        function getRandomInt(max) {
-            return Math.floor(Math.random() * Math.floor(max));
-          }
-        let arr = ['hi', 'sup', 'how are ya', 'send help', 'crispy']
-        let num = getRandomInt(arr.length)
-        console.log(arr[num])
-    }
+    // hitThisFunction = ()=>{
+    //     function getRandomInt(max) {
+    //         return Math.floor(Math.random() * Math.floor(max));
+    //       }
+    //     let arr = ['hi', 'sup', 'how are ya', 'send help', 'crispy']
+    //     let num = getRandomInt(arr.length)
+    //     console.log(arr[num])
+    // }
     setInterval(()=>{
         fetch('http://localhost:3000/liveFlight', {
             method: 'POST',
@@ -72,13 +79,15 @@ client.connect(function(err) {
         .then(res=> res.json())
         .then(data=> console.log(data))
         .catch(err => console.log(err))
-    }, 1000)
+    }, 2000)
     
     
     app.listen(PORT, ()=> console.log(`Listening on PORT ${PORT}`))
 
     // end connection to database
   });
-
+  getRandomInt=(max)=> {
+    return Math.floor(Math.random() * Math.floor(max));
+  }
 // console.log(plane.choose2RandomCities())
 
