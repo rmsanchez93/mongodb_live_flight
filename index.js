@@ -7,6 +7,7 @@ app.use(bodyParser.json())
 
 // import planelogic from other file
 const plane = require('./planeLogic')
+cities = plane.choose2RandomCities() //returns array ['city1', city2]
 
 // using mongo node library vs mongoose because mongoose is ORM and requires structure much like SQL
 const MongoClient = require('mongodb').MongoClient;
@@ -31,8 +32,9 @@ client.connect(function(err) {
     })
     
     app.post('/liveFlight',(req, res)=>{
+        console.log(cities)
         // hitThisFunction()
-        const col = db.collection('flightData')
+        // const col = db.collection('flightData')
         // here is where I make a random document based on flight pattern 
         
         // col.insertOne({
@@ -75,5 +77,5 @@ client.connect(function(err) {
     // end connection to database
   });
 
-
+// console.log(plane.choose2RandomCities())
 
